@@ -1,8 +1,11 @@
 import cv2
+import RPi.GPIO as GPIO
 import numpy as np
+from time import sleep
 
 # GENERAL SETTINGS
-path = 'D:/Documents/Projects/Saffron Project/images/'
+#path = 'D:/Documents/Projects/Saffron Project/images/'
+path = '/home/pi/Documents/Personal-Project/images/'
 imageSize = 1920, 1080  # resolution that find_pistil_center analyzes pictures
 outputSize = 500, 500  # resolution of debug window
 
@@ -123,6 +126,22 @@ def take_pic(name, camNum):
     cv2.destroyAllWindows()
     return
 
+# raspberry pi init
+def raspi_init():
+    GPIO.setmode(GPIO.BOARD)
+    return
+
+GPIO.setup(3,GPIO.OUT)
+GPIO.setup(5,GPIO.OUT)
+GPIO.setup(7,GPIO.OUT)
 
 if __name__ == '__main__':
-    harvestable('IMG_0124.jpg', True)
+    GPIO.output(3,GPIO.HIGH)
+    GPIO.output(5,GPIO.LOW)
+    sleep(2)
+    pwm=GPIO.PWM(7,50)
+    pwm.ChangeDutyCycle(2)
+    pwm.start(1)
+    sleep(2)
+    pwm.stop()
+    GPIO.cleanup()
