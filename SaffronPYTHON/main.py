@@ -127,15 +127,16 @@ def take_pic(name, camNum):
     return
 
 # raspberry pi init
-def raspi_init():
+def raspi_init(ports):
     GPIO.setmode(GPIO.BOARD)
+    for p in ports
+        GPIO.setmode(p)
     return
 
-GPIO.setup(3,GPIO.OUT)
-GPIO.setup(5,GPIO.OUT)
-GPIO.setup(7,GPIO.OUT)
-
 if __name__ == '__main__':
+    GPIO.setup(3,GPIO.OUT)
+    GPIO.setup(5,GPIO.OUT)
+    GPIO.setup(7,GPIO.OUT)
     GPIO.output(3,GPIO.HIGH)
     GPIO.output(5,GPIO.LOW)
     sleep(2)
